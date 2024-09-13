@@ -18,7 +18,8 @@ type heap struct {
 func (h *heap) Len() int { return len(h.items) }
 
 func (h *heap) Less(i, j int) bool {
-	return h.items[i].ctx.Compare(h.items[j].ctx) == h.compareResult
+	r:= h.items[i].ctx.Compare(h.items[j].ctx)
+	return r == h.compareResult || (r ==compare.Equal &&  h.items[i].id < h.items[j].id)
 }
 
 func (h *heap) Swap(i, j int) {
